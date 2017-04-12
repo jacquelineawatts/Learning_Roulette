@@ -17,7 +17,8 @@ function makeForceGraph(error, data) {
         .style('opacity', 0)
 
     var force = d3.forceSimulation(d3.values(dataNodes))
-        .force("link", d3.forceLink(links).distance(15).strength(0.1))
+        // .force("link", d3.forceLink(links).distance(10).strength(0.25)) //I like the clustering but too close togeter for closely related circles
+        .force("link", d3.forceLink(links).distance(45).strength(0.25)) //This gives slightly more breathing room, but some fall off the page
         .force("center", d3.forceCenter(width / 2, height/ 2))
         .force("charge", d3.forceManyBody())
         .on("tick", tick);
@@ -122,8 +123,10 @@ function makeForceGraph(error, data) {
         $.get('/find_video', {'slug': d.slug, 'time': time_preference }, function(response) {
             console.log(response);
             $('#videoName').text(response['title']);
+            $('#videoDuration').text(response['duration']);
+            $('#videoDesc').text(response['description']);  
             $('#videoThumbnail').attr('src', response['image_url']);
-            $('#videoLink').attr('href', response['ka_url']);
+            $('.videoLink').attr('href', response['ka_url']);
             $('#videoModal').modal('toggle');
         });
     }

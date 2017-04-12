@@ -26,18 +26,22 @@
         <h4 class="modal-title" id="videoModalLabel">We found a video for you!</h4>
       </div>
       <div class="modal-body">
-      <h6 id='videoName'></h6>
-        <a href=""><img id='videoThumbnail' src=''/></a>
+      <h6>Title: <span id='videoName'></span></h6>
+      <h6>Duration: <span id='videoDuration'></span> seconds</h6>
+      <h6>Description: <span id='videoDesc'></span></h6>
+
+        <a class='videoLink' href="" target="_blank"><img id='videoThumbnail' src=''/></a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Watch Video</button>
+        <a href="" type="button" target="_blank" class="btn btn-primary videoLink">Watch Video</a>
       </div>
     </div>
   </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src='static/d3_viz.js'></script> 
 
