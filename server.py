@@ -1,3 +1,11 @@
+""" 
+Todos: 
+1) Work on hover over of d3 circles to bring them to foreground, show
+tooltip text only if not already showing upon load.
+2) Work on formatting of video modal.
+3) Have svg center on the largest node (math).
+"""
+
 from flask import Flask, request, render_template, session, flash, jsonify, redirect, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined

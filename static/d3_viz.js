@@ -23,18 +23,11 @@ function makeForceGraph(error, data) {
         .force("charge", d3.forceManyBody())
         .on("tick", tick);
 
-    var svg = d3.select("body")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+    var svg = d3.select('svg');
+        // .append("svg")
+        // .attr("width", width)
+        // .attr("height", height);
 
-    // add the links and the arrows
-
-    var link = svg.selectAll(".link")
-        .data(links)
-        .enter()
-          .append("path")
-          .attr("class", "link");
 
     // define the nodes
 
@@ -61,11 +54,25 @@ function makeForceGraph(error, data) {
                   div.transition().style('opacity', 0)
                 });
 
+    // add the links and the arrows
+
+    var link = svg.selectAll(".link")
+        .data(links)
+        .enter()
+          .append("path")
+          .attr("class", "link");
+
 
     var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
     node.append("circle")
         .attr("r", function(d) { return d.num_children})
+          .on('mouseover', function(d, i) {
+            d3.select(this).transition().attr('r', function(d) { return d.num_children * 1.5})
+          })
+          .on('mouseout', function(d, i) {
+            d3.select(this).transition().attr('r', function(d) { return d.num_children })
+          })
         .style("fill", function (d) {
           return color(d.title);
         });

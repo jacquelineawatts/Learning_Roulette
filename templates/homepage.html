@@ -6,15 +6,28 @@
 
 {% block body %}
 
+<svg height='2000' width='2000'></svg>
+<!-- Time preference modal -->
 
-<div id="time-preference">
-<h4>How long do you have?</h4>
-    <form>
-        <input type="radio" name="time" value="5"><label> 5 minutes</label>
-        <input type="radio" name="time" value="10"><label> 10 minutes</label>
-        <input type="radio" name="time" value="15"><label> 15 minutes</label>
-        <input type="radio" name="time" value="20"><label> 20 minutes</label>
-    </form>
+<div class="modal fade" id="timeModal" tabindex="-1" role="dialog" aria-labelledby="timeModalLabel" show>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="videoModalLabel">How much time do you have?</h4>
+      </div>
+      <div class="modal-body" id='time-preference'>
+        <form id="timeForm">
+            <input type="radio" name="time" value="5"> <label>  5 minutes</label>
+            <input type="radio" name="time" value="10"> <label>  10 minutes</label>
+            <input type="radio" name="time" value="15"> <label>  15 minutes</label>
+            <input type="radio" name="time" value="20"> <label>  20 minutes</label>
+        </form>
+      </div>
+      <div class="modal-footer" id="addContinueButton">
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Video modal -->
@@ -33,17 +46,34 @@
         <a class='videoLink' href="" target="_blank"><img id='videoThumbnail' src=''/></a>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Select Another</button>
         <a href="" type="button" target="_blank" class="btn btn-primary videoLink">Watch Video</a>
       </div>
     </div>
   </div>
 </div>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src='static/d3_viz.js'></script> 
+<script>    
+    // $('#timeModal').modal('toggle');
 
+    $('svg').ready(function() {
+        window.scrollBy(500, 500);
+
+        $('#timeModal').modal('toggle');
+    }); 
+
+    $('#timeForm [type=radio]').each(function() {
+        $(this).on('click', function() {
+            $('#addContinueButton').html("<h4>Great, now it's time to select your topic of interest...</h4>" + "<button id='continue' type='button' class='btn btn-default' data-dismiss='modal'>Continue</button>");
+        })
+    });
+
+
+</script>
 
 {% endblock %}

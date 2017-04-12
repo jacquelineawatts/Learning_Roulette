@@ -27,7 +27,8 @@ def call_api_and_return_tree(kind, slug=None):
 def build_tree(response, kind):
     """Builds node relationships to build tree from Khan Academy API.
 
-    Nodes include topic title, slug, url, and children topic nodes.
+    Title Nodes include: title, slug, url, and children topic nodes.
+    Video Nodes include: title, slug, url, readable_id, and duration.
     """
 
     print "Starting new recursive call..."
@@ -59,7 +60,9 @@ def build_tree(response, kind):
 
 
 def get_video(topic, time, node):
-    """Given a parent topic and a time preference, returns a relevant video."""
+    """Given a topic slug and a time preference, returns a relevant video.
+
+    Time preference provided in seconds."""
 
     print ""
     print "New API request for videos: "
@@ -83,7 +86,7 @@ def get_video(topic, time, node):
 
 
 def return_all_nodes(root):
-    """Provided with a root node, returns list of all nodes. """
+    """Provided with a root node, returns list of all nodes, not including leaves. """
 
     all_nodes_with_children = []
 
