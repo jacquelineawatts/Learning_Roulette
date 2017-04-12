@@ -1,0 +1,18 @@
+.node {
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.link {
+  fill: none;
+  stroke: #bbb;
+  stroke-width: 2px;
+}
+
+#time-preference {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px 20px 20px;
+    border: 2px black solid;
+}
