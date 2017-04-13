@@ -13,7 +13,7 @@ function makeForceGraph(error, data) {
     var height = 2000;
 
     var div = d3.select('body').append('div')
-        .attr('class', 'tooltip')
+        .attr('class', 'tooltip tooltip-text')
         .style('opacity', 0)
 
     var force = d3.forceSimulation(d3.values(dataNodes))
@@ -83,7 +83,8 @@ function makeForceGraph(error, data) {
         .text(function (d) {
             if (d.num_children > 15) { return d.title; }
             })
-        .attr('text-anchor', 'middle');
+        .attr('text-anchor', 'middle')
+        .attr('class', 'tooltip-text');
 
     function tick() {
       link.attr("x1", function (d) {

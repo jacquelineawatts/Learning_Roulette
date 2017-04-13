@@ -15,3 +15,9 @@ svg {
   vertical-align: middle;
   text-align: center;
 }
+
+.tooltip-text {
+  pointer-events: none;
+}
+
+/* Define text class to not accept mouse (or pointer?) events. */

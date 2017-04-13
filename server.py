@@ -1,9 +1,15 @@
 """ 
 Todos: 
-1) Work on hover over of d3 circles to bring them to foreground, show
-tooltip text only if not already showing upon load.
-2) Work on formatting of video modal.
-3) Have svg center on the largest node (math).
+1) Work on hover over of d3 circles---need to a) bring circles to foreground and b) 
+show tooltip text only if not already showing upon load.
+
+2) Right now loading API response takes awhile upon first loading the app. Need to 
+cache this response and set up cron job to refresh cache (every 24 hrs?)
+
+3) Have svg center on the largest node (math), right now scrollBy has been 
+implemented for quick fix.
+
+4) Work on formatting of video modal.
 """
 
 from flask import Flask, request, render_template, session, flash, jsonify, redirect, url_for
