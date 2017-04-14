@@ -2,7 +2,7 @@ import requests
 import time
 import random
 from nodes import KATree, TopicNode, VideoNode
-
+import cPickle as pickle
 
 def call_api_and_return_tree(kind, slug=None):
     """Makes initial call to topictree endpoint, returns root node.
@@ -131,6 +131,15 @@ def find_nodes_and_paths(root):
     print "PATHS: ", paths
 
     return nodes, paths
+
+
+def pickle_topic_tree():
+    """Makes API call and pickles response."""
+
+    topic_tree = call_api_and_return_tree('Topic')
+    file_object = open('topic_tree_response.p', 'wb')
+
+    pickle.dump(topic_tree, file_object)
 
 
 if __name__ == '__main__':

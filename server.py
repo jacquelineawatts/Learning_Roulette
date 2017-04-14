@@ -18,14 +18,18 @@ from jinja2 import StrictUndefined
 import requests
 import ka_api
 from nodes import TopicNode, VideoNode
+import cPickle as pickle
 
 app = Flask(__name__)
 
 app.secret_key = "asdfasdf"
 app.jinja_env.undefined = StrictUndefined
 
-# Builds topic tree when first runnig the app
-topic_tree = ka_api.call_api_and_return_tree('Topic')
+# Loads cpickle of topic tree built from API response.
+# This is globally accessible to all routes.
+with open('topic_tree_response.p', 'rb') as pickle_file:
+    topic_tree = pickle.load(pickle_file)
+
 
 @app.route('/')
 def show_homepage():
@@ -37,7 +41,6 @@ def show_homepage():
 @app.route('/data.json')
 def get_data_for_d3():
     """Takes initial API response data and creates nodes and paths for D3 viz."""
-
 
     nodes, paths = ka_api.find_nodes_and_paths(topic_tree.head)
     chart_data = jsonify({'nodes':nodes, 'paths':paths})
