@@ -17,7 +17,7 @@ def call_api_and_return_tree(kind, slug=None):
         print 'Slug: ', slug
         
     print "Response successfully received!"
-    print 'Reponse: ', response
+    # print 'Reponse: ', response
     print "Building tree:"
     tree = KATree(build_tree(response, kind))
 
@@ -31,9 +31,9 @@ def build_tree(response, kind):
     Video Nodes include: title, slug, url, readable_id, and duration.
     """
 
-    print "Starting new recursive call..."
+    # print "Starting new recursive call..."
     if response:
-        print 'RESPONSE KEYS: ', response.keys()
+        # print 'RESPONSE KEYS: ', response.keys()
         if kind == 'Topic':
             current_node = TopicNode(response.get('standalone_title'),
                                       response.get('slug'),
@@ -45,16 +45,14 @@ def build_tree(response, kind):
                                       response.get('slug'),
                                       response.get('duration'))
 
-        print 'Current node: ', current_node
+        # print 'Current node: ', current_node
    
         if response.get('children'):
             for child in response['children']:
                 child_node = build_tree(child, kind)
                 current_node.children.append(child_node)
-        else:
-            print "No children found."
 
-        print 'Current node children: ', current_node.children
+        # print 'Current node children: ', current_node.children
 
         return current_node
 
@@ -69,14 +67,14 @@ def get_video(topic, time, node):
     response = requests.get('http://www.khanacademy.org/api/v1/topic/' + topic + '/videos').json()
 
     if response:
-        print 'Found one!'
+        # print 'Found one!'
         for r in response:
-            print 'RESPONSE: ', r
+            # print 'RESPONSE: ', r
             if r['duration'] < time:
                 return r
 
     elif node.children:
-        print 'None found... but checking children nodes.'
+        # print 'None found... but checking children nodes.'
         for node in node.children:
             video = get_video(node.slug, time, node)
             if video:
@@ -143,6 +141,8 @@ def pickle_topic_tree():
 
 
 if __name__ == '__main__':
-    import doctest
-    if doctest.testmod().failed == 0:
-        print "\n*** ALL TESTS PASSED.\n"
+    # import doctest
+    # if doctest.testmod().failed == 0:
+    #     print "\n*** ALL TESTS PASSED.\n"
+
+    pickle_topic_tree()
