@@ -24,13 +24,8 @@ function makeForceGraph(error, data) {
         .on("tick", tick);
 
     var svg = d3.select('svg');
-        // .append("svg")
-        // .attr("width", width)
-        // .attr("height", height);
-
 
     // define the nodes
-
     var node = svg.selectAll(".node")
         .data(force.nodes())
         .enter()
@@ -42,13 +37,16 @@ function makeForceGraph(error, data) {
               .on('end', dragended))
               .on('click', makeSelection)
               .on('mouseover', function(d, i){ 
-                    div.transition().style('opacity', 1.0);
+                    console.log(d);
+                    if (d.num_children <= 15) {
+                      div.transition().style('opacity', 1.0);
 
-                    // Still need to fix style attributes so tooltip shows up 
-                    // over d3 viz not above it.
-                    div.html("<strong>" + d.title + "</strong>")
-                        .style('left', d3.event.pageX + "px")
-                        .style('top', d3.event.pageY + "px");
+                      // Still need to fix style attributes so tooltip shows up 
+                      // over d3 viz not above it.
+                      div.html("<strong>" + d.title + "</strong>")
+                          .style('left', (d.x - d.num_children) + "px")
+                          .style('top', (d.y - d.num_children) + "px");
+                    }
                 }) 
               .on('mouseout', function(d, i) {
                   div.transition().style('opacity', 0)
@@ -77,14 +75,14 @@ function makeForceGraph(error, data) {
           return color(d.title);
         });
 
-    // add the text
-
+    // add the permanent text
     node.append("text")
         .text(function (d) {
             if (d.num_children > 15) { return d.title; }
             })
         .attr('text-anchor', 'middle')
-        .attr('class', 'tooltip-text');
+        .attr('class', 'tooltip-text')
+        .attr('class', 'show');
 
     function tick() {
       link.attr("x1", function (d) {
