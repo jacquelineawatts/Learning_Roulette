@@ -116,17 +116,10 @@ def find_nodes_and_paths(root):
               'num_children': len(node.children)}
               for node in all_nodes]
 
-    index_nodes = {}
-    for i, node in enumerate(nodes):
-        index_nodes[node['slug']] = i
-
     
-    paths = [{'source': index_nodes[node.slug],
-              'target': index_nodes[child.slug]} 
+    paths = [{'source': node.slug,
+              'target': child.slug} 
               for node in all_nodes for child in node.children if child.children]
-
-    print "NODES: ", nodes
-    print "PATHS: ", paths
 
     return nodes, paths
 
